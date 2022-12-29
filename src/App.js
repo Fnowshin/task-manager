@@ -4,6 +4,7 @@ import { Button } from 'flowbite-react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Home from './Pages/Home';
 import AddTask from './Pages/AddTask/AddTask';
+import MyTask from './Pages/MyTask/MyTasks';
 
 function App() {
 
@@ -15,6 +16,10 @@ function App() {
     {
       path: '/addtask',
       element: <AddTask></AddTask>
+    },
+    {
+      path: '/alltask',
+      element: <MyTask></MyTask>
     },
 
   ])

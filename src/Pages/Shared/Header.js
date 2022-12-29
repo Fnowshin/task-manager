@@ -22,14 +22,14 @@ const Header = (props) => {
                 <Navbar.Toggle />
                 <Navbar.Collapse>
                     <NavLink className="text-green-400"
-                        href="/"
+                        to='/'
                     >
                         Home
                     </NavLink>
                     <NavLink to='/addtask' className="text-green-400" >
                         Add Task 
                     </NavLink>
-                    <NavLink className="text-green-400" href="/navbars">
+                    <NavLink className="text-green-400" to="/alltask">
                         My Task
                     </NavLink>
                     <NavLink className="text-green-400" href="/navbars">
