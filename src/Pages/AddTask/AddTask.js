@@ -1,15 +1,13 @@
 import React from 'react';
-import Footer from '../Shared/Footer';
 import Header from '../Shared/Header';
 import TaskForm from './TaskForm';
 
 const AddTask = (props) => {
     return (
-       
-          <div>
+       <div>
           <Header></Header>
           <TaskForm></TaskForm>
-          </div>
+        </div>
           
         
     );

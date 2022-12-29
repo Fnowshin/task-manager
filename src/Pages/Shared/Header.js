@@ -21,23 +21,23 @@ const Header = (props) => {
                 </Navbar.Brand>
                 <Navbar.Toggle />
                 <Navbar.Collapse>
-                    <Navbar.Link className="text-green-400"
+                    <NavLink className="text-green-400"
                         href="/"
                     >
                         Home
-                    </Navbar.Link>
+                    </NavLink>
                     <NavLink to='/addtask' className="text-green-400" >
                         Add Task 
                     </NavLink>
-                    <Navbar.Link className="text-green-400" href="/navbars">
+                    <NavLink className="text-green-400" href="/navbars">
                         My Task
-                    </Navbar.Link>
-                    <Navbar.Link className="text-green-400" href="/navbars">
+                    </NavLink>
+                    <NavLink className="text-green-400" href="/navbars">
                         Completed task
-                    </Navbar.Link>
-                    <Navbar.Link className="text-green-400" href="/navbars">
+                    </NavLink>
+                    <NavLink className="text-green-400" href="/navbars">
                         Login 
-                    </Navbar.Link>
+                    </NavLink>
                 </Navbar.Collapse>
             </Navbar>
         </div>
