@@ -1,3 +1,4 @@
+import { data } from 'autoprefixer';
 import React, { useState } from 'react';
 
 
@@ -9,23 +10,36 @@ const TaskForm = () => {
     const handleAddedTask = event => {
         event.preventDefault();
         const form = event.target;
-        console.log(task);
+        const task = form.name.value;
+        // console.log(name);
+        // form.reset();
        
 
-        fetch ('http://localhost:5000/task',{
+
+        const taskName = {
+            task
+        }
+
+        fetch('http://localhost:5000/task' , {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
             },
-            body: JSON.stringify(task)
+            body: JSON.stringify(taskName)
         })
-        .then(res => res.json())
-        .then(data => {
-            console.log(data)
-            })
+       .then(res => res.json())
+       .then(data => {
+        console.log(data)
+        if(data.acknowledged){
+            alert('Task Added Succefully')
             form.reset();
-       
+        }
+    })
+    .catch(err => console.error(err)); 
+
+    
     }
+
 
 
     const handleChange = event => {
@@ -46,7 +60,7 @@ const TaskForm = () => {
 
                     <div className="col-span-full sm:col-span-3">
                         <label className="mx-auto font-bold">Add Task </label>
-                        <input id="addtask" type="text" name='task' onChange={handleChange}
+                        <input type="text" name='task' onChange={handleChange}
                             onKeyDown={handleKeyDown} placeholder="Add Task" className="w-full rounded-md focus:ring focus:ring-opacity-75 focus:ring-green-400 dark:border-green-700 dark:text-gray-900" />
                     </div>
                     <div>
