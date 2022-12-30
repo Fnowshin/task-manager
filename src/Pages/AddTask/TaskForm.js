@@ -1,23 +1,24 @@
 import { data } from 'autoprefixer';
 import React, { useState } from 'react';
+import { toast } from 'react-hot-toast';
 
 
 const TaskForm = () => {
 
-    const [task, setTask] = useState('');
-    const [updated, setUpdated] = useState('');
+    const [task, setTask] = useState({});
+    const [updated, setUpdated] = useState({});
 
     const handleAddedTask = event => {
         event.preventDefault();
         const form = event.target;
-        const task = form.name.value;
-        // console.log(name);
+        const name = form.name.value;
+        console.log(name);
         // form.reset();
        
 
 
         const taskName = {
-            task
+            name
         }
 
         fetch('http://localhost:5000/task' , {
@@ -31,7 +32,7 @@ const TaskForm = () => {
        .then(data => {
         console.log(data)
         if(data.acknowledged){
-            alert('Task Added Succefully')
+            toast('Task Added Succefully')
             form.reset();
         }
     })
@@ -60,7 +61,7 @@ const TaskForm = () => {
 
                     <div className="col-span-full sm:col-span-3">
                         <label className="mx-auto font-bold">Add Task </label>
-                        <input type="text" name='task' onChange={handleChange}
+                        <input type="text" name='name' onChange={handleChange}
                             onKeyDown={handleKeyDown} placeholder="Add Task" className="w-full rounded-md focus:ring focus:ring-opacity-75 focus:ring-green-400 dark:border-green-700 dark:text-gray-900" />
                     </div>
                     <div>

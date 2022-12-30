@@ -32,7 +32,7 @@ const Header = (props) => {
                     <NavLink className="text-green-400" to="/alltask">
                         My Task
                     </NavLink>
-                    <NavLink className="text-green-400" href="/navbars">
+                    <NavLink className="text-green-400" to="/completedtask">
                         Completed task
                     </NavLink>
                     <NavLink className="text-green-400" href="/navbars">
