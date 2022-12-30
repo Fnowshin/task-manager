@@ -1,8 +1,19 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Navbar } from 'flowbite-react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useLoaderData } from 'react-router-dom';
+import { AuthContext } from '../../Context/AuthProvider/AuthProvider';
 
 const Header = (props) => {
+
+    const {logOut} = useContext(AuthContext);
+
+    const handleLogOut = () => {
+        logOut()
+        .then ( () => {})
+        .catch (error => console.error(error))
+      }
+
+    
     return (
         <div className="bg-green-400" >
             <Navbar 
@@ -32,11 +43,14 @@ const Header = (props) => {
                     <NavLink className="text-green-400" to="/alltask">
                         My Task
                     </NavLink>
-                    <NavLink className="text-green-400" to="/completedtask">
+                    <NavLink className="text-green-400" to='/completedtask'>
                         Completed task
                     </NavLink>
-                    <NavLink className="text-green-400" href="/navbars">
+                    <NavLink className="text-green-400" to='/login'>
                         Login 
+                    </NavLink>
+                    <NavLink onClick={handleLogOut} className="text-green-400" to='/login'>
+                        Logout 
                     </NavLink>
                 </Navbar.Collapse>
             </Navbar>

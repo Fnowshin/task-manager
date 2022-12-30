@@ -1,6 +1,7 @@
 import { Table } from 'flowbite-react';
 import React, { useState } from 'react';
-import { useLoaderData } from 'react-router-dom';
+import { toast } from 'react-hot-toast';
+import { Link, useLoaderData } from 'react-router-dom';
 import Header from '../Shared/Header';
 
 
@@ -10,20 +11,43 @@ const MyTask = (props) => {
 
     const handleDelete = id => {
         const proceed = window.confirm('You Want to Delete Your Review')
-        if(proceed){
-            fetch(`http://localhost:5000/task/${id}`,{
+        if (proceed) {
+            fetch(`http://localhost:5000/task/${id}`, {
                 method: 'DELETE'
             })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data)
-                if (data.deletedCount > 0){ 
-                    alert('Task Deleted Successfully');
-                    const remaining = tasks.filter(t => t._id !== id);
-                    setTask(remaining)
-                }
-            })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data)
+                    if (data.deletedCount > 0) {
+                        alert('Task Deleted Successfully');
+                        const remaining = tasks.filter(t => t._id !== id);
+                        setTask(remaining)
+                    }
+                })
         }
+    }
+
+    const handleCompletedTask = event => {
+        event.preventDefault();
+       
+        const taskName = {
+            task
+        }
+    fetch('http://localhost:5000/completedTask', {
+        method: 'POST',
+        headers: {
+            'content-type': 'application/json'
+        },
+        body: JSON.stringify(taskName)
+    })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data)
+            if (data.acknowledged) {
+                toast('Task Completed Succefully')
+            }
+        })
+        .catch(err => console.error(err));
     }
     return (
         <div>
@@ -38,10 +62,12 @@ const MyTask = (props) => {
                                 <div className="flex flex-col justify-between p-6 space-y-8">
                                     <div className="space-y-2">
                                         <h2 className="text-xl font-semibold ">{task.name}</h2>
-                                       
+
                                     </div>
                                     <button onClick={() => handleDelete(task._id)} type="button" className="flex items-center justify-center w-full p-3 font-semibold tracking-wide rounded-md bg-green-400 text-gray-900">Delete</button>
-                                    <button type="button" className="flex items-center justify-center w-full p-3 font-semibold tracking-wide rounded-md bg-green-400 text-gray-900">Completed</button>
+                                    <Link to={`/completedtask/${task._id}`}>
+                                        <button onClick={handleCompletedTask} type="button" className="flex items-center justify-center w-full p-3 font-semibold tracking-wide rounded-md bg-green-400 text-gray-900">Completed</button>
+                                    </Link>
                                 </div>
                             </div>
                         </div>
